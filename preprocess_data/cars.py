@@ -5,7 +5,7 @@ import numpy as np
 import time
 from PIL import Image
 
-path = './data/cars/dataset/'
+path = 'data/cars/dataset/'
 
 if not os.path.isdir(path):
     os.mkdir(path)
@@ -13,7 +13,7 @@ if not os.path.isdir(path):
 time_start = time.time()
 
 # convert ids to class names
-class_names = scipy.io.loadmat('./data/cars/devkit/cars_meta.mat')
+class_names = scipy.io.loadmat('data/cars/devkit/cars_meta.mat')
 class_ids_to_names = dict()
 for row in range(len(class_names['class_names'][0])):
     name = class_names['class_names'][0][row][0]
@@ -22,7 +22,7 @@ for row in range(len(class_names['class_names'][0])):
     class_ids_to_names[row+1] = name
 
 # adapted from https://github.com/tonylaioffer/cnn_car_classification/blob/master/data_prepare.py
-mat = scipy.io.loadmat('./data/cars/devkit/cars_train_annos.mat')
+mat = scipy.io.loadmat('data/cars/devkit/cars_train_annos.mat')
 # print("annotations: ", mat['annotations'])
 training_class = mat['annotations']['class']
 training_fname = mat['annotations']['fname']
@@ -36,7 +36,7 @@ mat = scipy.io.loadmat('./data/cars/devkit/cars_test_annos_withlabels.mat')
 testing_class = mat['annotations']['class']
 testing_fname = mat['annotations']['fname']
 
-training_source = './data/cars/cars_train/' # specify source training image path
+training_source = 'data/cars/cars_train/' # specify source training image path
 training_output = path+'train/' # specify target trainig image path (trainig images need to be orgnized to specific structure)
 if not os.path.exists(training_output):
     os.mkdir(training_output)
@@ -50,7 +50,7 @@ for idx, cls in enumerate(training_class[0]):
         os.mkdir(output_path)
     shutil.copy(os.path.join(training_source, fname), os.path.join(output_path, fname))
 
-testing_source = './data/cars/cars_test/' # specify source testing image path
+testing_source = 'data/cars/cars_test/' # specify source testing image path
 testing_output = path+'test/' # specify target testing image path (testing images need to be orgnized to specific structure)
 if not os.path.exists(testing_output):
         os.mkdir(testing_output)
